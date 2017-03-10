@@ -58,6 +58,10 @@ public class Main {
           proceso proceso6 = new proceso(9,16,24,6);
           proceso proceso7= new proceso(4,20,12,7);
           proceso proceso8 = new proceso(8,22,18,8);
+          proceso prueba1 = new proceso(1,15,3,1);
+          proceso prueba2 = new proceso(1,10,1,2);
+          proceso prueba3 = new proceso(1,20,15,3);
+          
           lista_arrival.add(proceso1);
           lista_arrival.add(proceso2);
           lista_arrival.add(proceso3);
@@ -66,14 +70,19 @@ public class Main {
           lista_arrival.add(proceso6);
           lista_arrival.add(proceso7);
           lista_arrival.add(proceso8);
-        
-          main.Pre_procesarDatos(lista_arrival);
+       
+          /*
+          lista_arrival.add(prueba1);
+          lista_arrival.add(prueba2);
+          lista_arrival.add(prueba3);*/
+        main.Pre_procesarDatos(lista_arrival);
         System.out.println("Elegir algoritmo de ordenamiento ");
         System.out.println("Prioridad: 1"+ "\n"+
                            "Prioridad preferente: 2"+ "\n"
                             +"SJF: 3"+ "\n"+
                             "SRJF: 4"+ "\n"
-                            +"FCFS: 5"+ "\n");
+                            +"FCFS: 5"+ "\n"
+                            +"RR: 6"+"\n");
         int resp= sL.nextInt();
         switch(resp){
             
@@ -102,6 +111,11 @@ public class Main {
                FCFS.IniciaSimulacion();
                FCFS.imprimir();
                 break;
+            case 6:
+               AlgoritmoRR RR= new AlgoritmoRR(lista_arrival);
+               RR.IniciaSimulacion();
+               RR.imprimir();
+                break;
           
         }
         }
@@ -123,7 +137,7 @@ public class Main {
        
         }while(usuario==true&&lista_arrival.size()<=8);
         main.Pre_procesarDatos(lista_arrival);
-        System.out.println("Elegir tipo prioridad");
+        System.out.println("Elegir Calendarizador");
         String resp= sL.nextLine();
         switch(resp){
             
@@ -151,6 +165,11 @@ public class Main {
                AlgoritmoFCFS FCFS= new AlgoritmoFCFS(lista_arrival);
                FCFS.IniciaSimulacion();
                FCFS.imprimir();
+                break;
+             case "RR":
+               AlgoritmoRR RR= new AlgoritmoRR(lista_arrival);
+               RR.IniciaSimulacion();
+               RR.imprimir();
                 break;
           
     }

@@ -38,8 +38,16 @@ public abstract class AlgoritmoPlanificacion {
          return tiempo_restante;
      }
     public void gestionar_procesador(){
-         
+         if(getProceso_actual()!=null){
        if(proceso_actual.isTerminado()==true){
+           if(cola_prioridad.size()==0){
+            System.out.println("Proceso"+ proceso_actual.getId_proceso()+" "+ "completado");
+           SumaTotal=SumaTotal+getProceso_actual().getTiempo_total();
+           SumaTotal_Espera=SumaTotal_Espera+getProceso_actual().getTiempo_espera();
+           lista_imprimir.add(getProceso_actual());
+            setProceso_actual(null);
+           }
+           else{
            cola_prioridad.get(0).activar_proceso();
            System.out.println("Proceso"+ proceso_actual.getId_proceso()+" "+ "completado");
            SumaTotal=SumaTotal+getProceso_actual().getTiempo_total();
@@ -47,13 +55,13 @@ public abstract class AlgoritmoPlanificacion {
            lista_imprimir.add(getProceso_actual());
            setProceso_actual(cola_prioridad.get(0));
            cola_prioridad.remove(0);
-           
+           }
        }
        else{
            proceso_actual.activar_proceso();
            
        }
-            
+         }
        }
             
      public void despachar_restantes(){
@@ -62,6 +70,7 @@ public abstract class AlgoritmoPlanificacion {
              
           while(cola_prioridad.size()>0&&cola_prioridad.get(i).isTerminado()==false){        
             gestionar_procesador();
+            
             for(int j=0;j<cola_prioridad.size();j++){
              cola_prioridad.get(j).Tiempo_espera++;
             }
@@ -76,6 +85,7 @@ public abstract class AlgoritmoPlanificacion {
            lista_imprimir.add(getProceso_actual());
            System.out.println("Proceso"+ proceso_actual.getId_proceso()+ " "+ "completado");
          }else{
+             if(proceso_actual!=null){
              while(!proceso_actual.isTerminado()){
                  proceso_actual.activar_proceso();
              }
@@ -83,7 +93,7 @@ public abstract class AlgoritmoPlanificacion {
            SumaTotal=SumaTotal+getProceso_actual().getTiempo_total();
            SumaTotal_Espera=SumaTotal_Espera+getProceso_actual().getTiempo_espera();
            lista_imprimir.add(getProceso_actual());
-             
+             }
          }
      }
     
@@ -99,7 +109,7 @@ public abstract class AlgoritmoPlanificacion {
          
     }
     public double Promedio (double SumaTotal){
-        double promedio= SumaTotal/8;
+        double promedio= SumaTotal/lista_arrival.size();
         return promedio;
     }
     

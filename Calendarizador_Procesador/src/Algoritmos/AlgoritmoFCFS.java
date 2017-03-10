@@ -35,8 +35,8 @@ public class AlgoritmoFCFS extends AlgoritmoPlanificacion {
              if(BanderaPaso==true){
              ordenar_llegada(lista_arrival.get(i));
              i++;
-             contador_global++;
-            gestionar_procesador();
+             contador_global=proceso_actual.getTiempo_llegada();
+           
             BanderaPaso=false;
              }
              else{
@@ -48,8 +48,8 @@ public class AlgoritmoFCFS extends AlgoritmoPlanificacion {
          }
          
          contador_global++;
-         
-         gestionar_procesador();
+        
+        gestionar_procesador();
          for(int j=0;j<cola_prioridad.size();j++){
              cola_prioridad.get(j).Tiempo_espera++;
          }
@@ -59,14 +59,16 @@ public class AlgoritmoFCFS extends AlgoritmoPlanificacion {
           }
      }
       public void ordenar_llegada(proceso proceso){
+           if(getProceso_actual()==null){
+      
+                 procesador_ocupado=false;
+             }
          if(cola_prioridad.size()==0&&procesador_ocupado==false){
              cola_prioridad.add(proceso);
              procesador_ocupado=true;
              setProceso_actual(cola_prioridad.get(0));
              cola_prioridad.remove(0);
-             if(proceso_actual.isTerminado()){
-                 procesador_ocupado=false;
-             }
+            
                      }
          else{
              cola_prioridad.add(proceso);

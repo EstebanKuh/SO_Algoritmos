@@ -14,7 +14,7 @@ package Procesos;
 public class proceso  {
     
     public int prioridad;
-    public int quantum;
+    
     public int Tiempo_llegada;
     public int Tiempo_rafaga;
     public int Tiempo_total;
@@ -22,6 +22,9 @@ public class proceso  {
     public int id_proceso;
     public boolean terminado;
     public int Tiempo_rafaga2;
+    public int quantum=8;
+    public int quantumClon=quantum;
+    public boolean quantumTerminado;
     
     public proceso(int prioridad, int quantum, int Tiempo_llegada, int Tiempo_rafaga, int id_proceso) {
         this.prioridad = prioridad;
@@ -88,13 +91,41 @@ public class proceso  {
         }
         return terminado;
     }
-
+    public boolean activarProceso_quantum(){
+       setTerminado(false);
+       Tiempo_rafaga2--;
+       quantumClon--;
+       if(quantumClon==0){
+           setQuantumTerminado(true);
+        
+           quantumClon=getQuantum();
+           
+           
+       }
+        if(Tiempo_rafaga2==0){
+        setTerminado(true);
+        setTiempo_total(Tiempo_rafaga+getTiempo_espera());
+        }
+       return terminado;
+       }
+       
+   
+   
+    
     public boolean isTerminado() {
         return terminado;
     }
 
     public void setTerminado(boolean terminado) {
         this.terminado = terminado;
+    }
+
+    public boolean isQuantumTerminado() {
+        return quantumTerminado;
+    }
+
+    public void setQuantumTerminado(boolean quantumTerminado) {
+        this.quantumTerminado = quantumTerminado;
     }
 
    

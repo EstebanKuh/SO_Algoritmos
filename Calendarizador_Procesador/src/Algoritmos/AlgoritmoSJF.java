@@ -39,8 +39,8 @@ public class AlgoritmoSJF extends AlgoritmoPlanificacion {
              if(BanderaPaso==true){
              ordenar_rafagas(lista_arrival.get(i));
              i++;
-             contador_global++;
-            gestionar_procesador();
+            contador_global=proceso_actual.getTiempo_llegada();
+           
             BanderaPaso=false;
              }
              else{
@@ -63,14 +63,16 @@ public class AlgoritmoSJF extends AlgoritmoPlanificacion {
           }
      }
       public void ordenar_rafagas(proceso proceso){
+           if(getProceso_actual()==null){
+      
+                 procesador_ocupado=false;
+             }
          if(cola_prioridad.size()==0&&procesador_ocupado==false){
              cola_prioridad.add(proceso);
              procesador_ocupado=true;
              setProceso_actual(cola_prioridad.get(0));
              cola_prioridad.remove(0);
-             if(proceso_actual.isTerminado()){
-                 procesador_ocupado=false;
-             }
+             
                      }
          else{
              cola_prioridad.add(proceso);

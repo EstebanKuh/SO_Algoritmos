@@ -30,6 +30,7 @@ public class AlgoritmoRR extends AlgoritmoPlanificacion {
             for (int n = 0; n < lista_arrival.size(); n++) {
                 ordenar_llegada(lista_arrival.get(n));
                 gestionarProcesadorConQuantum();
+                evalua_quantum();
             }
             despachar_restantes();
         } else {

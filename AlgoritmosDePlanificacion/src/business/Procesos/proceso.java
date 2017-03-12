@@ -29,6 +29,7 @@ public class proceso {
         this.quantum = quantum;
         this.Tiempo_llegada = Tiempo_llegada;
         this.Tiempo_rafaga = Tiempo_rafaga;
+        this.quantum=quantum=8;
         this.id_proceso = id_proceso;
         quantumClon=this.quantum;
 
@@ -41,11 +42,14 @@ public class proceso {
 //        this.Tiempo_llegada = Tiempo_llegada;
 //        this.Tiempo_rafaga = Tiempo_rafaga;
 //        this.id_proceso = id_proceso;
+         quantum=8;
+         quantumClon = quantum;
     }
 
     public proceso(int Tiempo_llegada, int Tiempo_rafaga, int id_proceso) {
         this.Tiempo_llegada = Tiempo_llegada;
         this.Tiempo_rafaga = Tiempo_rafaga;
+         this.Tiempo_rafaga2 = Tiempo_rafaga;
         this.id_proceso = id_proceso;
         quantum=8;
         quantumClon = quantum;
@@ -65,10 +69,10 @@ public class proceso {
 
     public boolean ComparaRafagas(proceso compara_con) {
         boolean flag = false;
-        if (getTiempo_rafaga() < compara_con.getTiempo_rafaga()) {
+        if (Tiempo_rafaga2 < compara_con.Tiempo_rafaga2) {
             flag = true;
         }
-        if (getTiempo_rafaga() == compara_con.getTiempo_rafaga()) {
+        if (Tiempo_rafaga == compara_con.Tiempo_rafaga) {
             flag = Evalua_llegada(compara_con);
         }
 
@@ -87,7 +91,7 @@ public class proceso {
     public boolean activar_proceso() {
         setTerminado(false);
         Tiempo_rafaga2--;
-        if (Tiempo_rafaga2 == 0) {
+        if (Tiempo_rafaga2 <= 0) {
             setTerminado(true);
             setTiempo_total(Tiempo_rafaga + getTiempo_espera());
         }
@@ -104,7 +108,7 @@ public class proceso {
             quantumClon = getQuantum();
 
         }
-        if (Tiempo_rafaga2 == 0) {
+        if (Tiempo_rafaga2 <= 0) {
             setTerminado(true);
             setTiempo_total(Tiempo_rafaga + getTiempo_espera());
         }
